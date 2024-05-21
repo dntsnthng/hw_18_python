@@ -1,5 +1,4 @@
 import allure
-from requests import Response
 from page.cart import CartPage
 from data.user import user
 
@@ -29,4 +28,4 @@ def test_check_cart():
     cart.open()
     cart.login(user)
     cart.check_card()
-    cart.response_logging()
+
