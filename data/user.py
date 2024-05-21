@@ -9,5 +9,5 @@ class User:
 
 
 user = User(LOGIN="hw_18@python.ru", PASSWORD="12344321",
-            WEB_URL="https://demowebshop.tricentis.com/",
+            WEB_URL="https://demowebshop.tricentis.com/"
             )
