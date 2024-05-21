@@ -33,19 +33,19 @@ class CartPage:
         browser.driver.add_cookie({"name": "NOPCOMMERCE.AUTH", "value": cookie})
         browser.open(user.WEB_URL)
 
-    def login(self,user: User):
+    def login(self, user: User):
         browser.element('.ico-login').click()
         browser.element('#Email').send_keys(user.LOGIN).press_enter()
         browser.element('#Password').send_keys(user.PASSWORD).click()
         browser.element('.button-1.login-button').click()
 
-    def add_card_picture(self):
-        response = self.api_request(url="https://demowebshop.tricentis.com/", endpoint="addproducttocart/catalog/53/1/1", method="POST")
+    def add_card_picture(self, user: User):
+        response = self.api_request(url=user.WEB_URL, endpoint="addproducttocart/catalog/53/1/1", method="POST")
         body = response.json()
         validate(body, schema=picture)
 
-    def add_card_jewelry(self):
-        response = self.api_request (url="https://demowebshop.tricentis.com/", endpoint="/addproducttocart/catalog/14/1/1", method="POST")
+    def add_card_jewelry(self, user: User):
+        response = self.api_request (url=user.WEB_URL, endpoint="/addproducttocart/catalog/14/1/1", method="POST")
         body = response.json()
         validate(body, schema=jewelry)
 

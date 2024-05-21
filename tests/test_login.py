@@ -13,13 +13,13 @@ def test_demowebshop():
 @allure.title('Add pictures in cart')
 def test_add_pictures():
     cart = CartPage()
-    cart.add_card_picture()
+    cart.add_card_picture(user)
 
 
 @allure.title('Add jewelry in cart')
 def test_add_fl():
     cart = CartPage()
-    cart.add_card_jewelry()
+    cart.add_card_jewelry(user)
 
 
 @allure.title('Check cart')
