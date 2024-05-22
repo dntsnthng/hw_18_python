@@ -55,3 +55,10 @@ class CartPage:
         browser.element('#topcartlink').click()
         browser.element('table.cart').should(have.text("3rd Album"))
         browser.element('table.cart').should(have.text("Black & White Diamond Heart"))
+
+
+    def test_check_cart(self):
+        self.open()
+        self.login()
+        self.check_card()
+

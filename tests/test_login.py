@@ -23,9 +23,8 @@ def test_add_fl():
 
 
 @allure.title('Check cart')
-def test_check_cart():
+def test_check_shop():
     cart = CartPage()
-    cart.open()
-    cart.login()
-    cart.check_card()
+    cart.test_check_cart()
+
 
