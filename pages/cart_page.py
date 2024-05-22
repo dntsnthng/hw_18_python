@@ -1,44 +1,53 @@
+import os
+
 from selene import browser, have
 from jsonschema import validate
-from data.user import User
-from schemas.schemas import picture, jewelry
+
+from schemas.json import picture, jewelry
 from utils.api_functions import Api
+from dotenv import load_dotenv
+
+load_dotenv()
+EMAIL = os.getenv("EMAIL")
+PASS = os.getenv("PASS")
+URL = "https://demowebshop.tricentis.com/"
+
 
 
 class CartPage:
 
-    def open(self, user: User):
-        browser.open(user.WEB_URL)
+    def open(self):
+        browser.open(URL)
 
-    def login_api(self, user: User):
-        r = Api()
-        result = r.api_request(url=user.WEB_URL, endpoint="login", method="POST",
-                               data={"Email": user.LOGIN, "password": user.PASSWORD, "RememberMe": False},
+    def login_api(self):
+        login_with = Api()
+        result = login_with.api_request(url=URL, endpoint="login", method="POST",
+                               data={"Email": EMAIL, "password": PASS, "RememberMe": False},
                                allow_redirects=False)
 
         print(result.text)
         print(result.cookies)
         cookie = result.cookies.get("NOPCOMMERCE.AUTH")
 
-        browser.open(user.WEB_URL)
+        browser.open(URL)
         browser.driver.add_cookie({"name": "NOPCOMMERCE.AUTH", "value": cookie})
-        browser.open(user.WEB_URL)
+        browser.open(URL)
 
-    def login(self, user: User):
+    def login(self):
         browser.element('.ico-login').click()
-        browser.element('#Email').send_keys(user.LOGIN).press_enter()
-        browser.element('#Password').send_keys(user.PASSWORD).click()
+        browser.element('#Email').send_keys(EMAIL).press_enter()
+        browser.element('#Password').send_keys(PASS).click()
         browser.element('.button-1.login-button').click()
 
-    def add_card_picture(self, user: User):
+    def add_card_picture(self):
         r = Api()
-        response = r.api_request(url=user.WEB_URL, endpoint="addproducttocart/catalog/53/1/1", method="POST")
+        response = r.api_request(url=URL, endpoint="addproducttocart/catalog/53/1/1", method="POST")
         body = response.json()
         validate(body, schema=picture)
 
-    def add_card_jewelry(self, user: User):
+    def add_card_jewelry(self):
         r = Api()
-        response = r.api_request(url=user.WEB_URL, endpoint="/addproducttocart/catalog/14/1/1", method="POST")
+        response = r.api_request(url=URL, endpoint="/addproducttocart/catalog/14/1/1", method="POST")
         body = response.json()
         validate(body, schema=jewelry)
 
