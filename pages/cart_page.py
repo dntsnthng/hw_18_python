@@ -38,7 +38,7 @@ class CartPage:
 
     def add_card_jewelry(self, user: User):
         r = Api()
-        response = r.api_request(url="https://demowebshop.tricentis.com/", endpoint="/addproducttocart/catalog/14/1/1", method="POST")
+        response = r.api_request(url=user.WEB_URL, endpoint="/addproducttocart/catalog/14/1/1", method="POST")
         body = response.json()
         validate(body, schema=jewelry)
 
