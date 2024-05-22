@@ -1,5 +1,5 @@
 import allure
-from page.cart import CartPage
+from pages.cart_page import CartPage
 from data.user import user
 
 
@@ -25,7 +25,7 @@ def test_add_fl():
 @allure.title('Check cart')
 def test_check_cart():
     cart = CartPage()
-    cart.open()
+    cart.open(user)
     cart.login(user)
     cart.check_card()
 

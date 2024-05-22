@@ -1,7 +1,6 @@
 import os
 
 import pytest
-import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selene import browser
@@ -46,7 +45,7 @@ def setup_browser(request):
         command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
         options=options
     )
-    browser.config.base_url = 'https://demowebshop.tricentis.com/'
+
     browser.config.window_width = 1920
     browser.config.window_height = 1080
     browser.config.driver = driver
